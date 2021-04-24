@@ -1,0 +1,17 @@
+#build
+FROM golang:1.16 as build
+
+ENV PATH="/go/bin:${PATH}"
+
+WORKDIR /go/src
+
+COPY . .
+
+RUN GOOS=linux go build -ldflags="-s -w"
+
+#prodution
+FROM scratch
+
+COPY --from=build /go/src/codeeducation-rocks .
+
+ENTRYPOINT ["./codeeducation-rocks"]

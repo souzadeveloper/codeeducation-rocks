@@ -1,0 +1,11 @@
+version: '3'
+
+services: 
+
+  app:
+    build: .
+    image: souzadeveloper/codeeducation
+    container_name: golang
+    entrypoint: ./.docker/entrypoint.sh
+    volumes:
+      - .:/go/src
